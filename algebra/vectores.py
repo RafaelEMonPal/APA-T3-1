@@ -2,6 +2,7 @@
     Tercera tarea de APA - manejo de vectores
 
     Nombre y apellidos:
+    Rafael E. Moncayo Palate
 """
 
 class Vector:
@@ -85,3 +86,62 @@ class Vector:
 
         return -self + other
 
+    def __mul__(self, other):
+        """
+        Multiplicación de los elementos de un vector por un escalar u otro vector
+        >>> v1 = Vector([1, 2, 3])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1*v2
+        Vector([4, 10, 18])
+        >>> v1*2
+        Vector([2, 4, 6])
+        """
+        if isinstance(other,Vector):
+            return Vector(Selfpos * Otherpos for Selfpos, Otherpos in zip(self, other))
+        else:
+            return Vector(Selfpos*other for Selfpos in self)
+    
+    __rmul__=__mul__
+    
+    def __matmul__(self,other):
+        """
+        Implementa el producto escalar de dos vectores.
+        >>> v1 = Vector([1, 2, 3])
+        >>> v2 = Vector([4, 5, 6])
+        >>> v1@v2
+        32
+        """
+        if isinstance(other,Vector):
+            return sum(Selfpos * Otherpos for Selfpos, Otherpos in zip(self, other))
+    
+    __rmatmul__=__matmul__
+
+    def __floordiv__(self, other):
+        """
+        Devuelve la componente tangencial
+        >>> v1 = Vector([2, 1, 2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1//v2
+        Vector([1.0, 2.0, 1.0])
+        """
+        if isinstance(other,Vector):
+            modulo=pow(sum(pow(otherpos,2) for otherpos in other), 0.5)
+            return ((self@ other)/(pow(modulo,2))* other)
+
+    __rfloordiv__=__floordiv__
+
+    def __mod__(self,other):
+        """
+        Devuelve la componente perpendicular
+        >>> v1 = Vector([2, 1, 2])
+        >>> v2 = Vector([0.5, 1, 0.5])
+        >>> v1%v2
+        Vector([1.0, -1.0, 1.0])
+        """
+        if isinstance(other,Vector):
+            return self-(self//other)
+
+    __rmod__=__mod__
+    
+import doctest
+doctest.testmod()
