@@ -237,8 +237,8 @@ def __mod__(self,other):
 
     __rmod__=__mod__
 ```
-<img src="img\matmul.png" width="640" align="center">  
-*por mucho que me de error me parece que un valor de 1.0 es prácticamente los mismo que un valor de 1.0000000000000000002
+<img src="img\errordecimales%.png" width="640" align="center">  
+*por mucho que me de error me parece que un valor de 1.0 es prácticamente los mismo que un valor de 1.0000000000000000002  
   
 Comprovación:  
 <img src="img\ComprovacionV1.png" width="640" align="center">
